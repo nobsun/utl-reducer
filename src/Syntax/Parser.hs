@@ -42,12 +42,34 @@ clex = \ case
 isIdChar :: Char -> Bool
 isIdChar c = isAscii c && (isAlpha c || c == '_')
 
+-- Term Parser
+
+type TermParser = Parser Term
+
+pTerm :: TermParser
+pTerm = undefined
+
+
+-- Parser コンビネータ
+
 newtype Parser a = 
     Parser { parser :: [Token] -> [(a, [Token])] }
 
 instance Functor Parser where
     fmap :: (a -> b) -> Parser a -> Parser b
     fmap f p = Parser $ fmap (first f) . p.parser
+
+instance Applicative Parser where
+    pure :: a -> Parser a
+    pure x = Parser $ \ toks -> [(x, toks)]
+    (<*>) :: Parser (a -> b) -> Parser a -> Parser b
+    p <*> q = Parser $ \ toks ->
+                [ (s t, ss) | (s, rs) <- p.parser toks, (t, ss) <- q.parser rs ]
+
+instance Monad Parser where
+    (>>=) :: Parser a -> (a -> Parser b) -> Parser b
+    p >>= f = Parser $ \ toks ->
+                [ (t,ss) | (s, rs) <- p.parser toks, (t, ss) <- (f s).parser rs ]
 
 pSat :: (Token -> Bool) -> Parser Token
 pSat p = Parser $ \ case
@@ -69,3 +91,9 @@ p <++ q = Parser $ (<+) <$> p.parser <*> q.parser
 x  <+ _ = x
 
 infixr 5 <+
+
+pMany1 :: Parser a -> Parser [a]
+pMany1 = undefined
+
+pMany :: Parser a -> Parser [a]
+pMany p = pMany1 p <++ pure []
