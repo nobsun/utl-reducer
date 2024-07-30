@@ -1,6 +1,6 @@
-name:                simple-interactive-program
+name:                utl-reducer
 version:             0.0.0
-github:              nobsun/simple-interactive-program
+github:              nobsun/utl-reducer
 license:             BSD3
 author:              Nobuo Yamashita
 maintainer:          nobsun@sampou.org
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/nobsun/simple-interactive-program#readme>
+description:         Please see the README on GitHub at <https://github.com/nobsun/utl-reducer#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -56,6 +56,9 @@ default-extensions:
 - NoStarIsType
 - TypeFamilyDependencies
 - UndecidableInstances
+- NoFieldSelectors
+- DuplicateRecordFields
+- OverloadedRecordDot
 
 ghc-options:
 - -Wall
@@ -68,26 +71,26 @@ library:
   source-dirs: src
 
 executables:
-  simple-interactive-program:
+  utl-reducer:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
     - -rtsopts
     dependencies:
-    - simple-interactive-program
+    - utl-reducer
 
 tests:
-  simple-interactive-program-test:
+  utl-reducer-test:
     main:                spec.hs
     source-dirs:         test
     dependencies:
-    - simple-interactive-program
+    - utl-reducer
     - hspec
     - main-tester
 
-  simple-interactive-program-doctest:
+  utl-reducer-doctest:
     main:                doctests.hs
     source-dirs:         test
     dependencies:
-    - simple-interactive-program
+    - utl-reducer
     - doctest

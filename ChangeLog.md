@@ -1,3 +1,3 @@
-# Changelog for simple-interactive-program
+# Changelog for utl-reducer
 
 ## Unreleased changes

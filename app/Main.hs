@@ -1,4 +1,12 @@
+{-# LANGUAGE GHC2021 #-}
 {-# LANGUAGE ImplicitParams #-}
+{-# LANGUAGE ImportQualifiedPost #-}
+{-# LANGUAGE LambdaCase, LexicalNegation, MultiWayIf #-}
+{-# LANGUAGE NPlusKPatterns #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds, PolyKinds, NoStarIsType #-}
+{-# LANGUAGE TypeFamilyDependencies, UndecidableInstances #-}
+{-# LANGUAGE NoFieldSelectors, DuplicateRecordFields, OverloadedRecordDot #-}
 module Main where
 
 import Control.Concurrent.Chan ( newChan )
@@ -15,7 +23,7 @@ import Interaction.Interact
       outputLinesWithPrompt,
       outputLinesWithPrompt',
       Prompt )
-import Interaction.Interacts
+import Interaction.Interacts ( interacts, timeoutMsg, tenSecs )
 import System.Environment ( getArgs )
 
 main :: IO ()

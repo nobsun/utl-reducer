@@ -1,3 +1,12 @@
+{-# LANGUAGE GHC2021 #-}
+{-# LANGUAGE ImplicitParams #-}
+{-# LANGUAGE ImportQualifiedPost #-}
+{-# LANGUAGE LambdaCase, LexicalNegation, MultiWayIf #-}
+{-# LANGUAGE NPlusKPatterns #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds, PolyKinds, NoStarIsType #-}
+{-# LANGUAGE TypeFamilyDependencies, UndecidableInstances #-}
+{-# LANGUAGE NoFieldSelectors, DuplicateRecordFields, OverloadedRecordDot #-}
 module Interaction.Interact
     ( InputConfig (..)
     , defaultInputConfig
@@ -57,12 +66,12 @@ inputLines' :: InputConfig -> IO [String]
 inputLines' config 
     = unsafeInterleaveIO
     $ do
-    { minput <- runInputT (defaultSettings { historyFile = history config})
+    { minput <- runInputT (defaultSettings { historyFile = config.history })
                           (getInputLine "")
     ; case minput of
         Nothing -> return []
         Just line 
-            | line == quit config -> return []
+            | line == config.quit -> return []
             | otherwise           -> (line :) <$> inputLines' config
     }
 
