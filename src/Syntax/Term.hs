@@ -9,7 +9,6 @@
 {-# LANGUAGE NoFieldSelectors, DuplicateRecordFields, OverloadedRecordDot #-}
 module Syntax.Term where
 
-import Control.Comonad.Trans.Cofree qualified as F
 import Control.Comonad.Cofree
 import Data.Functor.Foldable
 
