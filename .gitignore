@@ -1,0 +1,12 @@
+.stack-work/
+dist-new/
+hie.yaml
+simple-interactive-program.cabal
+*.log
+.curproj
+.curname
+!programming_session.log
+core
+*.hi
+*.o
+*~
